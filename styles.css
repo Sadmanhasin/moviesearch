@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#movieInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+#movieInput:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+#searchMovie {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#searchMovie:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+#searchMovie:active {
+    transform: translateY(0);
+}
+
+#movieResult {
+    min-height: 50px;
+    color: #666;
+}
+
+.movie-card {
+    display: flex;
+    gap: 20px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.poster {
+    width: 150px;
+    height: 225px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-info h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.movie-info p {
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.movie-info strong {
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .movie-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .poster {
+        width: 100%;
+        max-width: 200px;
+    }
+}
