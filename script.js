@@ -9,12 +9,24 @@ btn.addEventListener("click", async () => {
   const movie = movieInput.value.trim();
 
   if (!movie) {
-    result.textContent = "Please enter a movie name";
+    result.innerHTML = `
+      <div class="status-card">
+        <div class="empty-illustration" aria-hidden="true">🎞️</div>
+        <h2>Please enter a movie name</h2>
+        <p>Try something like “Interstellar” or “Parasite”.</p>
+      </div>
+    `;
     return;
   }
 
   // Loading state
-  result.textContent = "Loading...";
+  result.innerHTML = `
+    <div class="status-card">
+      <div class="empty-illustration" aria-hidden="true">⏳</div>
+      <h2>Searching...</h2>
+      <p>Fetching the best match for you.</p>
+    </div>
+  `;
 
   try {
     const res = await fetch(
@@ -23,25 +35,46 @@ btn.addEventListener("click", async () => {
     const data = await res.json();
 
     if (data.Response === "False") {
-      result.textContent = "❌ Movie not found";
+      result.innerHTML = `
+        <div class="status-card">
+          <div class="empty-illustration" aria-hidden="true">🔎</div>
+          <h2>Movie not found</h2>
+          <p>Check the spelling or try another title.</p>
+        </div>
+      `;
       return;
     }
 
+    const poster = data.Poster && data.Poster !== "N/A"
+      ? data.Poster
+      : "https://via.placeholder.com/400x600?text=No+Poster";
+
+    const genres = data.Genre ? data.Genre.split(",") : [];
+
     result.innerHTML = `
       <div class="movie-card">
-        <img src="${data.Poster}" alt="${data.Title}" class="poster">
+        <img src="${poster}" alt="${data.Title}" class="poster">
         <div class="movie-info">
           <h2>${data.Title}</h2>
+          <div class="tag-list">
+            ${genres.map((genre) => `<span class="tag">${genre.trim()}</span>`).join("")}
+          </div>
           <p><strong>Year:</strong> ${data.Year}</p>
           <p><strong>Director:</strong> ${data.Director}</p>
-          <p><strong>Genre:</strong> ${data.Genre}</p>
+          <p><strong>Runtime:</strong> ${data.Runtime}</p>
           <p><strong>Plot:</strong> ${data.Plot}</p>
-          <p><strong>Rating:</strong> ${data.imdbRating}/10</p>
+          <span class="rating">⭐ ${data.imdbRating}/10</span>
         </div>
       </div>
     `;
   } catch (error) {
-    result.textContent = "❌ Something went wrong. Please try again.";
+    result.innerHTML = `
+      <div class="status-card">
+        <div class="empty-illustration" aria-hidden="true">⚠️</div>
+        <h2>Something went wrong</h2>
+        <p>Please try again in a moment.</p>
+      </div>
+    `;
     console.error("Error fetching movie:", error);
   }
 });

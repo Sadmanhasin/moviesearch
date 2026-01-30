@@ -8,20 +8,48 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>🎬 Movie Search App</h1>
-        
-        <div class="search-box">
-            <input 
-                type="text" 
-                id="movieInput" 
-                placeholder="Search movie"
-                autocomplete="off"
-            >
-            <button id="searchMovie">Search</button>
-        </div>
+    <div class="app">
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-icon" aria-hidden="true">🎬</span>
+                <div>
+                    <h1>Movie Search</h1>
+                    <p class="subtitle">Find details, ratings, and plot in seconds.</p>
+                </div>
+            </div>
+            <div class="header-glow" aria-hidden="true"></div>
+        </header>
 
-        <div id="movieResult"></div>
+        <main class="content">
+            <section class="search-panel" aria-label="Search movies">
+                <label class="search-label" for="movieInput">Movie title</label>
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="movieInput"
+                        placeholder="Search for a movie (e.g., Inception)"
+                        autocomplete="off"
+                    >
+                    <button id="searchMovie" type="button">
+                        <span class="button-text">Search</span>
+                        <span class="button-icon" aria-hidden="true">→</span>
+                    </button>
+                </div>
+                <p class="helper-text">Tip: press Enter to search faster.</p>
+            </section>
+
+            <section class="results" aria-live="polite">
+                <div id="movieResult" class="empty-state">
+                    <div class="empty-illustration" aria-hidden="true">🍿</div>
+                    <h2>Start exploring</h2>
+                    <p>Search any movie title to see cast, ratings, and plot.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Powered by OMDb API • Built for movie lovers</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
